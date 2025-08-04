@@ -1,5 +1,4 @@
-# Write a program to input electricity unit charges and calculate total electricity bill
-# according to the given condition:
+# Write a program to input electricity unit charges and calculate total electricity bill according to the given condition:
 # For first 50 units Rs. 0.50/unit
 # For next 100 units Rs. 0.75/unit
 # For next 100 units Rs. 1.20/unit
@@ -8,7 +7,6 @@
 
 unit=int(input("Enter total unit electricity used:"))
 bill=0
-
 if unit<=50:
     bill=unit*0.5
 elif unit<=150:
