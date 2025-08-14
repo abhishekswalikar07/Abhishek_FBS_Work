@@ -6,7 +6,7 @@
 id=123
 pwd=12345
 
-for attempgt in range(1,4):
+for attempt in range(1,4):
     userid=int(input("Enter user ID:"))
     password=int(input("Enter password:"))
     
