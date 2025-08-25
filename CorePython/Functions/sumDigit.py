@@ -4,5 +4,5 @@ def sumDigit(n):
     else:
         return (n%10)+sumDigit(n//10)
     
-num=4567
+num=int(input("Enter a number:"))
 print("Sum of digit is:",sumDigit(num))
