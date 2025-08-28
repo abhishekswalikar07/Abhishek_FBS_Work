@@ -2,7 +2,12 @@
 # and odd elements in that list and then create two separate lists which will have
 # even elements and other will have odd elements.
 
-li=[12,43,87,6,89,45,86,57,82]
+li=[]
+n=int(input("Enter how many elements wants to add:"))
+for i in range(n):
+    ele=int(input("Enter number:"))
+    li.append(ele)
+print("List:",li)
 even=[]
 odd=[]
 
