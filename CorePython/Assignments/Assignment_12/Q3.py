@@ -1,7 +1,5 @@
 # Python Program to Detect if Two Strings are Anagrams
 
-
-
 def are_anagrams(str1, str2):
     if len(str1) != len(str2):
         return False
@@ -18,7 +16,6 @@ def are_anagrams(str1, str2):
     for value in count.values():
         if value != 0:
             return False
-
     return True
 
 s1 = "triangle"
