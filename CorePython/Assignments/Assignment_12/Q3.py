@@ -6,7 +6,7 @@ def are_anagrams(str1, str2):
  
     count = {}
     for ch in str1:
-        count[ch] = count.get(ch, 0) + 1
+        count[ch] = count.get(ch, 0) + 1 # Checks whether ch is present in dict then returns its value else bydefault it gives default_value
 
     for ch in str2:
         if ch not in count:
@@ -18,8 +18,8 @@ def are_anagrams(str1, str2):
             return False
     return True
 
-s1 = "triangle"
-s2 = "integral"
+s1 = "triangle".lower()
+s2 = "integral".lower()
 
 if are_anagrams(s1, s2):
     print(f"Yes, {s1} and {s2} are anagrams")
