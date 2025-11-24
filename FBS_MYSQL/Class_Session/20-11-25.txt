@@ -1,0 +1,313 @@
+Enter password: ****
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 8
+Server version: 8.0.42 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2025, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| fbs                |
+| information_schema |
+| july25             |
+| mysql              |
+| performance_schema |
+| sakila             |
+| sys                |
+| world              |
++--------------------+
+8 rows in set (0.02 sec)
+
+mysql> use july25;
+Database changed
+mysql> show tables;
++------------------+
+| Tables_in_july25 |
++------------------+
+| branch           |
+| dept             |
+| emp              |
+| room             |
+| student          |
++------------------+
+5 rows in set (0.02 sec)
+
+mysql> table student;
++--------+---------+-------------+--------+---------+------------+-------+------+
+| rollno | name    | email_id    | gender | address | percentage | mobno | brno |
++--------+---------+-------------+--------+---------+------------+-------+------+
+|    100 | Pravin  | NULL        | NULL   | NULL    |       NULL |  NULL |    2 |
+|    101 | Deepak  | NULL        | NULL   | NULL    |         70 |  NULL | NULL |
+|    102 | Shubham | s@gmail.com | NULL   | NULL    |       NULL |  NULL | NULL |
+|    103 | Ashwini | NULL        | NULL   | NULL    |       NULL |  NULL | NULL |
++--------+---------+-------------+--------+---------+------------+-------+------+
+4 rows in set (0.04 sec)
+
+mysql> desc student;
++------------+-------------+------+-----+---------+-------+
+| Field      | Type        | Null | Key | Default | Extra |
++------------+-------------+------+-----+---------+-------+
+| rollno     | int         | NO   | PRI | NULL    |       |
+| name       | varchar(20) | NO   |     | NULL    |       |
+| email_id   | varchar(20) | YES  | UNI | NULL    |       |
+| gender     | char(1)     | YES  |     | NULL    |       |
+| address    | varchar(20) | YES  |     | NULL    |       |
+| percentage | int         | YES  |     | NULL    |       |
+| mobno      | int         | YES  |     | NULL    |       |
+| brno       | int         | YES  | MUL | NULL    |       |
++------------+-------------+------+-----+---------+-------+
+8 rows in set (0.01 sec)
+
+mysql> delete from student where name='Ashwini';
+Query OK, 1 row affected (0.01 sec)
+
+mysql> table student;
++--------+---------+-------------+--------+---------+------------+-------+------+
+| rollno | name    | email_id    | gender | address | percentage | mobno | brno |
++--------+---------+-------------+--------+---------+------------+-------+------+
+|    100 | Pravin  | NULL        | NULL   | NULL    |       NULL |  NULL |    2 |
+|    101 | Deepak  | NULL        | NULL   | NULL    |         70 |  NULL | NULL |
+|    102 | Shubham | s@gmail.com | NULL   | NULL    |       NULL |  NULL | NULL |
++--------+---------+-------------+--------+---------+------------+-------+------+
+3 rows in set (0.00 sec)
+
+mysql> create table student1 as(select * from student);
+Query OK, 3 rows affected (0.04 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> table student1;
++--------+---------+-------------+--------+---------+------------+-------+------+
+| rollno | name    | email_id    | gender | address | percentage | mobno | brno |
++--------+---------+-------------+--------+---------+------------+-------+------+
+|    100 | Pravin  | NULL        | NULL   | NULL    |       NULL |  NULL |    2 |
+|    101 | Deepak  | NULL        | NULL   | NULL    |         70 |  NULL | NULL |
+|    102 | Shubham | s@gmail.com | NULL   | NULL    |       NULL |  NULL | NULL |
++--------+---------+-------------+--------+---------+------------+-------+------+
+3 rows in set (0.00 sec)
+
+mysql> drop student1;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'student1' at line 1
+mysql> drop table student1;
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> desc student1;
+ERROR 1146 (42S02): Table 'july25.student1' doesn't exist
+mysql> create table student1 as(select * from student);
+Query OK, 3 rows affected (0.04 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> truncate student1;
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> desc student1;
++------------+-------------+------+-----+---------+-------+
+| Field      | Type        | Null | Key | Default | Extra |
++------------+-------------+------+-----+---------+-------+
+| rollno     | int         | NO   |     | NULL    |       |
+| name       | varchar(20) | NO   |     | NULL    |       |
+| email_id   | varchar(20) | YES  |     | NULL    |       |
+| gender     | char(1)     | YES  |     | NULL    |       |
+| address    | varchar(20) | YES  |     | NULL    |       |
+| percentage | int         | YES  |     | NULL    |       |
+| mobno      | int         | YES  |     | NULL    |       |
+| brno       | int         | YES  |     | NULL    |       |
++------------+-------------+------+-----+---------+-------+
+8 rows in set (0.00 sec)
+
+mysql> table student1;
+Empty set (0.00 sec)
+
+mysql> drop table student1;
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> desc student1;
+ERROR 1146 (42S02): Table 'july25.student1' doesn't exist
+mysql> desc student;
++------------+-------------+------+-----+---------+-------+
+| Field      | Type        | Null | Key | Default | Extra |
++------------+-------------+------+-----+---------+-------+
+| rollno     | int         | NO   | PRI | NULL    |       |
+| name       | varchar(20) | NO   |     | NULL    |       |
+| email_id   | varchar(20) | YES  | UNI | NULL    |       |
+| gender     | char(1)     | YES  |     | NULL    |       |
+| address    | varchar(20) | YES  |     | NULL    |       |
+| percentage | int         | YES  |     | NULL    |       |
+| mobno      | int         | YES  |     | NULL    |       |
+| brno       | int         | YES  | MUL | NULL    |       |
++------------+-------------+------+-----+---------+-------+
+8 rows in set (0.00 sec)
+
+mysql> table student;
++--------+---------+-------------+--------+---------+------------+-------+------+
+| rollno | name    | email_id    | gender | address | percentage | mobno | brno |
++--------+---------+-------------+--------+---------+------------+-------+------+
+|    100 | Pravin  | NULL        | NULL   | NULL    |       NULL |  NULL |    2 |
+|    101 | Deepak  | NULL        | NULL   | NULL    |         70 |  NULL | NULL |
+|    102 | Shubham | s@gmail.com | NULL   | NULL    |       NULL |  NULL | NULL |
++--------+---------+-------------+--------+---------+------------+-------+------+
+3 rows in set (0.00 sec)
+
+mysql> truncate student;
+Query OK, 0 rows affected (0.09 sec)
+
+mysql> desc student;
++------------+-------------+------+-----+---------+-------+
+| Field      | Type        | Null | Key | Default | Extra |
++------------+-------------+------+-----+---------+-------+
+| rollno     | int         | NO   | PRI | NULL    |       |
+| name       | varchar(20) | NO   |     | NULL    |       |
+| email_id   | varchar(20) | YES  | UNI | NULL    |       |
+| gender     | char(1)     | YES  |     | NULL    |       |
+| address    | varchar(20) | YES  |     | NULL    |       |
+| percentage | int         | YES  |     | NULL    |       |
+| mobno      | int         | YES  |     | NULL    |       |
+| brno       | int         | YES  | MUL | NULL    |       |
++------------+-------------+------+-----+---------+-------+
+8 rows in set (0.00 sec)
+
+mysql> alter table student
+    -> modify column rollno int auto_increment;
+Query OK, 0 rows affected (0.23 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc student;
++------------+-------------+------+-----+---------+----------------+
+| Field      | Type        | Null | Key | Default | Extra          |
++------------+-------------+------+-----+---------+----------------+
+| rollno     | int         | NO   | PRI | NULL    | auto_increment |
+| name       | varchar(20) | NO   |     | NULL    |                |
+| email_id   | varchar(20) | YES  | UNI | NULL    |                |
+| gender     | char(1)     | YES  |     | NULL    |                |
+| address    | varchar(20) | YES  |     | NULL    |                |
+| percentage | int         | YES  |     | NULL    |                |
+| mobno      | int         | YES  |     | NULL    |                |
+| brno       | int         | YES  | MUL | NULL    |                |
++------------+-------------+------+-----+---------+----------------+
+8 rows in set (0.00 sec)
+
+mysql> insert into student(name,mobno) values('Abhishek',987654321);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> table student;
++--------+----------+----------+--------+---------+------------+-----------+------+
+| rollno | name     | email_id | gender | address | percentage | mobno     | brno |
++--------+----------+----------+--------+---------+------------+-----------+------+
+|      1 | Abhishek | NULL     | NULL   | NULL    |       NULL | 987654321 | NULL |
++--------+----------+----------+--------+---------+------------+-----------+------+
+1 row in set (0.00 sec)
+
+mysql> table branch;
++-----+------+--------+
+| bno | name | intake |
++-----+------+--------+
+|   2 | Comp |    120 |
++-----+------+--------+
+1 row in set (0.03 sec)
+
+mysql> table emp;
++-----+--------+--------+-----------+----------+------+------+--------+------------+
+| eid | name   | salary | mobno     | address  | dno  | age  | gender | j_date     |
++-----+--------+--------+-----------+----------+------+------+--------+------------+
+| 101 | Deepak |  26000 | 985012468 | Parbhani |    1 |   23 | M      | 2023-02-23 |
+| 102 | Sakshi |   NULL | 985012456 | Pune     | NULL | NULL | F      | NULL       |
++-----+--------+--------+-----------+----------+------+------+--------+------------+
+2 rows in set (0.00 sec)
+
+mysql> desc emp;
++---------+-------------+------+-----+---------+----------------+
+| Field   | Type        | Null | Key | Default | Extra          |
++---------+-------------+------+-----+---------+----------------+
+| eid     | int         | NO   | PRI | NULL    | auto_increment |
+| name    | varchar(20) | NO   |     | NULL    |                |
+| salary  | int         | YES  |     | NULL    |                |
+| mobno   | int         | YES  | UNI | NULL    |                |
+| address | varchar(20) | YES  |     | Pune    |                |
+| dno     | int         | YES  | MUL | NULL    |                |
+| age     | int         | YES  |     | NULL    |                |
+| gender  | varchar(1)  | YES  |     | NULL    |                |
+| j_date  | date        | YES  |     | NULL    |                |
++---------+-------------+------+-----+---------+----------------+
+9 rows in set (0.00 sec)
+
+mysql> insert into student(name,mobno) values('Sham',987654537);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> desc student;
++------------+-------------+------+-----+---------+----------------+
+| Field      | Type        | Null | Key | Default | Extra          |
++------------+-------------+------+-----+---------+----------------+
+| rollno     | int         | NO   | PRI | NULL    | auto_increment |
+| name       | varchar(20) | NO   |     | NULL    |                |
+| email_id   | varchar(20) | YES  | UNI | NULL    |                |
+| gender     | char(1)     | YES  |     | NULL    |                |
+| address    | varchar(20) | YES  |     | NULL    |                |
+| percentage | int         | YES  |     | NULL    |                |
+| mobno      | int         | YES  |     | NULL    |                |
+| brno       | int         | YES  | MUL | NULL    |                |
++------------+-------------+------+-----+---------+----------------+
+8 rows in set (0.00 sec)
+
+mysql> table student;
++--------+----------+----------+--------+---------+------------+-----------+------+
+| rollno | name     | email_id | gender | address | percentage | mobno     | brno |
++--------+----------+----------+--------+---------+------------+-----------+------+
+|      1 | Abhishek | NULL     | NULL   | NULL    |       NULL | 987654321 | NULL |
+|      2 | Sham     | NULL     | NULL   | NULL    |       NULL | 987654537 | NULL |
++--------+----------+----------+--------+---------+------------+-----------+------+
+2 rows in set (0.00 sec)
+
+mysql> delete from student where name='sham';
+Query OK, 1 row affected (0.01 sec)
+
+mysql> table student;
++--------+----------+----------+--------+---------+------------+-----------+------+
+| rollno | name     | email_id | gender | address | percentage | mobno     | brno |
++--------+----------+----------+--------+---------+------------+-----------+------+
+|      1 | Abhishek | NULL     | NULL   | NULL    |       NULL | 987654321 | NULL |
++--------+----------+----------+--------+---------+------------+-----------+------+
+1 row in set (0.00 sec)
+
+mysql> truncate student;
+Query OK, 0 rows affected (0.07 sec)
+
+mysql> table student;
+Empty set (0.00 sec)
+
+mysql> desc student;
++------------+-------------+------+-----+---------+----------------+
+| Field      | Type        | Null | Key | Default | Extra          |
++------------+-------------+------+-----+---------+----------------+
+| rollno     | int         | NO   | PRI | NULL    | auto_increment |
+| name       | varchar(20) | NO   |     | NULL    |                |
+| email_id   | varchar(20) | YES  | UNI | NULL    |                |
+| gender     | char(1)     | YES  |     | NULL    |                |
+| address    | varchar(20) | YES  |     | NULL    |                |
+| percentage | int         | YES  |     | NULL    |                |
+| mobno      | int         | YES  |     | NULL    |                |
+| brno       | int         | YES  | MUL | NULL    |                |
++------------+-------------+------+-----+---------+----------------+
+8 rows in set (0.00 sec)
+
+mysql> desc emp;
++---------+-------------+------+-----+---------+----------------+
+| Field   | Type        | Null | Key | Default | Extra          |
++---------+-------------+------+-----+---------+----------------+
+| eid     | int         | NO   | PRI | NULL    | auto_increment |
+| name    | varchar(20) | NO   |     | NULL    |                |
+| salary  | int         | YES  |     | NULL    |                |
+| mobno   | int         | YES  | UNI | NULL    |                |
+| address | varchar(20) | YES  |     | Pune    |                |
+| dno     | int         | YES  | MUL | NULL    |                |
+| age     | int         | YES  |     | NULL    |                |
+| gender  | varchar(1)  | YES  |     | NULL    |                |
+| j_date  | date        | YES  |     | NULL    |                |
++---------+-------------+------+-----+---------+----------------+
+9 rows in set (0.00 sec)
