@@ -1,0 +1,233 @@
+Enter password: ****
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 8
+Server version: 8.0.42 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2025, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| fbs                |
+| information_schema |
+| july25             |
+| mysql              |
+| performance_schema |
+| sakila             |
+| sys                |
+| world              |
++--------------------+
+8 rows in set (0.02 sec)
+
+mysql> use  july25;
+Database changed
+mysql> show tables;
++------------------+
+| Tables_in_july25 |
++------------------+
+| branch           |
+| dept             |
+| emp              |
+| employee         |
+| room             |
+| student          |
++------------------+
+6 rows in set (0.02 sec)
+
+mysql> desc employee;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| eid     | int         | YES  |     | NULL    |       |
+| name    | varchar(10) | YES  |     | NULL    |       |
+| salary  | float(7,2)  | YES  |     | NULL    |       |
+| gender  | char(1)     | YES  |     | NULL    |       |
+| address | varchar(20) | YES  |     | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+5 rows in set (0.01 sec)
+
+mysql> desc emp;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| eid     | int         | NO   | PRI | NULL    |       |
+| name    | varchar(20) | NO   |     | NULL    |       |
+| salary  | int         | YES  |     | NULL    |       |
+| mobno   | int         | YES  | UNI | NULL    |       |
+| address | varchar(20) | YES  |     | Pune    |       |
+| dno     | int         | YES  | MUL | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+6 rows in set (0.01 sec)
+
+mysql> drop table employee;
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> show tables;
++------------------+
+| Tables_in_july25 |
++------------------+
+| branch           |
+| dept             |
+| emp              |
+| room             |
+| student          |
++------------------+
+5 rows in set (0.00 sec)
+
+mysql> table emp;
+Empty set (0.01 sec)
+
+mysql> desc emp;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| eid     | int         | NO   | PRI | NULL    |       |
+| name    | varchar(20) | NO   |     | NULL    |       |
+| salary  | int         | YES  |     | NULL    |       |
+| mobno   | int         | YES  | UNI | NULL    |       |
+| address | varchar(20) | YES  |     | Pune    |       |
+| dno     | int         | YES  | MUL | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+6 rows in set (0.00 sec)
+
+mysql> alter table emp
+    -> add column age int,
+    -> add column gender varchar(1),
+    -> add column j_date date;
+Query OK, 0 rows affected (0.12 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc emp;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| eid     | int         | NO   | PRI | NULL    |       |
+| name    | varchar(20) | NO   |     | NULL    |       |
+| salary  | int         | YES  |     | NULL    |       |
+| mobno   | int         | YES  | UNI | NULL    |       |
+| address | varchar(20) | YES  |     | Pune    |       |
+| dno     | int         | YES  | MUL | NULL    |       |
+| age     | int         | YES  |     | NULL    |       |
+| gender  | varchar(1)  | YES  |     | NULL    |       |
+| j_date  | date        | YES  |     | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+9 rows in set (0.00 sec)
+
+mysql> table emp;
+Empty set (0.00 sec)
+
+mysql> alter table emp
+    -> ;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> alter table emp
+    -> modify column emp int auto_increment;
+ERROR 1054 (42S22): Unknown column 'emp' in 'emp'
+mysql> alter table emp
+    -> modify column eid int auto_increment;
+Query OK, 0 rows affected (0.13 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc emp;
++---------+-------------+------+-----+---------+----------------+
+| Field   | Type        | Null | Key | Default | Extra          |
++---------+-------------+------+-----+---------+----------------+
+| eid     | int         | NO   | PRI | NULL    | auto_increment |
+| name    | varchar(20) | NO   |     | NULL    |                |
+| salary  | int         | YES  |     | NULL    |                |
+| mobno   | int         | YES  | UNI | NULL    |                |
+| address | varchar(20) | YES  |     | Pune    |                |
+| dno     | int         | YES  | MUL | NULL    |                |
+| age     | int         | YES  |     | NULL    |                |
+| gender  | varchar(1)  | YES  |     | NULL    |                |
+| j_date  | date        | YES  |     | NULL    |                |
++---------+-------------+------+-----+---------+----------------+
+9 rows in set (0.00 sec)
+
+mysql> insert into emp values(101,"Deepak",26000,985012468,"Parbhani",1,23,'M','2023-2-23');
+ERROR 1452 (23000): Cannot add or update a child row: a foreign key constraint fails (`july25`.`emp`, CONSTRAINT `emp_ibfk_1` FOREIGN KEY (`dno`) REFERENCES `dept` (`dno`))
+mysql> desc dept;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| dno      | int         | NO   | PRI | NULL    |       |
+| name     | varchar(20) | YES  |     | NULL    |       |
+| location | varchar(20) | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> table dept;
+Empty set (0.00 sec)
+
+mysql> insert into dept values(1,'IT',"Pune"),
+    -> (2,'Admin','Mumbai');
+Query OK, 2 rows affected (0.01 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+mysql> table dept;
++-----+-------+----------+
+| dno | name  | location |
++-----+-------+----------+
+|   1 | IT    | Pune     |
+|   2 | Admin | Mumbai   |
++-----+-------+----------+
+2 rows in set (0.00 sec)
+
+mysql> insert into emp values(101,"Deepak",26000,985012468,"Parbhani",1,23,'M','2023-2-23');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> desc emp;
++---------+-------------+------+-----+---------+----------------+
+| Field   | Type        | Null | Key | Default | Extra          |
++---------+-------------+------+-----+---------+----------------+
+| eid     | int         | NO   | PRI | NULL    | auto_increment |
+| name    | varchar(20) | NO   |     | NULL    |                |
+| salary  | int         | YES  |     | NULL    |                |
+| mobno   | int         | YES  | UNI | NULL    |                |
+| address | varchar(20) | YES  |     | Pune    |                |
+| dno     | int         | YES  | MUL | NULL    |                |
+| age     | int         | YES  |     | NULL    |                |
+| gender  | varchar(1)  | YES  |     | NULL    |                |
+| j_date  | date        | YES  |     | NULL    |                |
++---------+-------------+------+-----+---------+----------------+
+9 rows in set (0.00 sec)
+
+mysql> table emp;
++-----+--------+--------+-----------+----------+------+------+--------+------------+
+| eid | name   | salary | mobno     | address  | dno  | age  | gender | j_date     |
++-----+--------+--------+-----------+----------+------+------+--------+------------+
+| 101 | Deepak |  26000 | 985012468 | Parbhani |    1 |   23 | M      | 2023-02-23 |
++-----+--------+--------+-----------+----------+------+------+--------+------------+
+1 row in set (0.00 sec)
+
+mysql> insert into emp(eid,name,mobno) values(102,"Sakshi",985012456);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> table emp;
++-----+--------+--------+-----------+----------+------+------+--------+------------+
+| eid | name   | salary | mobno     | address  | dno  | age  | gender | j_date     |
++-----+--------+--------+-----------+----------+------+------+--------+------------+
+| 101 | Deepak |  26000 | 985012468 | Parbhani |    1 |   23 | M      | 2023-02-23 |
+| 102 | Sakshi |   NULL | 985012456 | Pune     | NULL | NULL | NULL   | NULL       |
++-----+--------+--------+-----------+----------+------+------+--------+------------+
+2 rows in set (0.00 sec)
+
+mysql> update emp set gender='F' where name="Sakshi";
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> table emp;
++-----+--------+--------+-----------+----------+------+------+--------+------------+
+| eid | name   | salary | mobno     | address  | dno  | age  | gender | j_date     |
++-----+--------+--------+-----------+----------+------+------+--------+------------+
+| 101 | Deepak |  26000 | 985012468 | Parbhani |    1 |   23 | M      | 2023-02-23 |
+| 102 | Sakshi |   NULL | 985012456 | Pune     | NULL | NULL | F      | NULL       |
++-----+--------+--------+-----------+----------+------+------+--------+------------+
+2 rows in set (0.00 sec)

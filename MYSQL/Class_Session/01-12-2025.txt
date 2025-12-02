@@ -1,0 +1,529 @@
+Enter password: ****
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 8
+Server version: 8.0.42 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2025, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| ass2               |
+| ass3               |
+| fbs                |
+| firstbit_sql       |
+| information_schema |
+| july25             |
+| mysql              |
+| performance_schema |
+| sakila             |
+| sys                |
+| world              |
++--------------------+
+11 rows in set (0.12 sec)
+
+mysql> use july25;
+Database changed
+mysql> show tables;
++------------------+
+| Tables_in_july25 |
++------------------+
+| branch           |
+| dept             |
+| emp              |
+| room             |
+| shirt            |
+| student          |
++------------------+
+6 rows in set (0.02 sec)
+
+mysql> desc emp;
++---------+-------------+------+-----+---------+----------------+
+| Field   | Type        | Null | Key | Default | Extra          |
++---------+-------------+------+-----+---------+----------------+
+| eid     | int         | NO   | PRI | NULL    | auto_increment |
+| name    | varchar(20) | NO   |     | NULL    |                |
+| salary  | int         | YES  |     | NULL    |                |
+| mobno   | int         | YES  | UNI | NULL    |                |
+| address | varchar(20) | YES  |     | Pune    |                |
+| dno     | int         | YES  | MUL | NULL    |                |
+| age     | int         | YES  |     | NULL    |                |
+| gender  | varchar(1)  | YES  |     | NULL    |                |
+| j_date  | date        | YES  |     | NULL    |                |
++---------+-------------+------+-----+---------+----------------+
+9 rows in set (0.02 sec)
+
+mysql> table emp;
++-----+----------+--------+-----------+----------+------+------+--------+------------+
+| eid | name     | salary | mobno     | address  | dno  | age  | gender | j_date     |
++-----+----------+--------+-----------+----------+------+------+--------+------------+
+| 101 | Deepak   |  23000 | 985012468 | Parbhani |    3 |   23 | M      | 2023-02-23 |
+| 102 | Awanti   |  25000 | 985012456 | Pune     |    1 |   25 | F      | 2023-10-24 |
+| 103 | Mayur    |  28000 | 978653420 | nagar    |    2 |   23 | M      | 2024-10-12 |
+| 104 | Abhishek |  21000 | 978656421 | Sangli   |    1 |   24 | M      | 2024-09-18 |
+| 105 | Shubham  |  24000 | 977865642 | Sangli   |    2 |   23 | M      | 2023-06-18 |
+| 106 | Sakshi   |  25000 | 978653320 | mumbai   |    2 |   25 | F      | 2021-10-12 |
+| 107 | Prachi   |  28000 | 975653320 | mumbai   |    2 |   25 | F      | 2022-09-12 |
+| 108 | Aman     |  24000 | 974543320 | Pune     |    1 |   29 | M      | 2023-01-10 |
+| 109 | Jai      |  23000 | 974563320 | Pune     |    1 |   22 | M      | 2022-07-07 |
+| 110 | Yash     |  23000 | 978563420 | Nagpur   |    2 |   23 | M      | 2021-07-07 |
++-----+----------+--------+-----------+----------+------+------+--------+------------+
+10 rows in set (0.05 sec)
+
+mysql> select name,locate('a',name) 'position of a' from emp;
++----------+---------------+
+| name     | position of a |
++----------+---------------+
+| Deepak   |             5 |
+| Awanti   |             1 |
+| Mayur    |             2 |
+| Abhishek |             1 |
+| Shubham  |             6 |
+| Sakshi   |             2 |
+| Prachi   |             3 |
+| Aman     |             1 |
+| Jai      |             2 |
+| Yash     |             2 |
++----------+---------------+
+10 rows in set (0.01 sec)
+
+mysql> select name,length(name) 'Length of name' from emp;
++----------+----------------+
+| name     | Length of name |
++----------+----------------+
+| Deepak   |              6 |
+| Awanti   |              6 |
+| Mayur    |              5 |
+| Abhishek |              8 |
+| Shubham  |              7 |
+| Sakshi   |              6 |
+| Prachi   |              6 |
+| Aman     |              4 |
+| Jai      |              3 |
+| Yash     |              4 |
++----------+----------------+
+10 rows in set (0.00 sec)
+
+mysql> select substring('FirstBit',6,3);
++---------------------------+
+| substring('FirstBit',6,3) |
++---------------------------+
+| Bit                       |
++---------------------------+
+1 row in set (0.01 sec)
+
+mysql> select upper(address) from emp;
++----------------+
+| upper(address) |
++----------------+
+| PARBHANI       |
+| PUNE           |
+| NAGAR          |
+| SANGLI         |
+| SANGLI         |
+| MUMBAI         |
+| MUMBAI         |
+| PUNE           |
+| PUNE           |
+| NAGPUR         |
++----------------+
+10 rows in set (0.01 sec)
+
+mysql> select lower(address) from emp;
++----------------+
+| lower(address) |
++----------------+
+| parbhani       |
+| pune           |
+| nagar          |
+| sangli         |
+| sangli         |
+| mumbai         |
+| mumbai         |
+| pune           |
+| pune           |
+| nagpur         |
++----------------+
+10 rows in set (0.01 sec)
+
+mysql> select name,replace(name,'a','z') from emp;
++----------+-----------------------+
+| name     | replace(name,'a','z') |
++----------+-----------------------+
+| Deepak   | Deepzk                |
+| Awanti   | Awznti                |
+| Mayur    | Mzyur                 |
+| Abhishek | Abhishek              |
+| Shubham  | Shubhzm               |
+| Sakshi   | Szkshi                |
+| Prachi   | Przchi                |
+| Aman     | Amzn                  |
+| Jai      | Jzi                   |
+| Yash     | Yzsh                  |
++----------+-----------------------+
+10 rows in set (0.01 sec)
+
+mysql> select ltrim('      FirstBit') as output;
++----------+
+| output   |
++----------+
+| FirstBit |
++----------+
+1 row in set (0.01 sec)
+
+mysql> select ltrim('      FirstBit') as 'output';
++----------+
+| output   |
++----------+
+| FirstBit |
++----------+
+1 row in set (0.00 sec)
+
+mysql> select rtrim('FirstBit       ') as 'output';
++----------+
+| output   |
++----------+
+| FirstBit |
++----------+
+1 row in set (0.00 sec)
+
+mysql> select trim('      FirstBit       ') as 'output';
++----------+
+| output   |
++----------+
+| FirstBit |
++----------+
+1 row in set (0.00 sec)
+
+mysql> select curdate();
++------------+
+| curdate()  |
++------------+
+| 2025-12-01 |
++------------+
+1 row in set (0.01 sec)
+
+mysql> select sysdate();
++---------------------+
+| sysdate()           |
++---------------------+
+| 2025-12-01 19:57:18 |
++---------------------+
+1 row in set (0.01 sec)
+
+mysql> select now();
++---------------------+
+| now()               |
++---------------------+
+| 2025-12-01 19:57:25 |
++---------------------+
+1 row in set (0.01 sec)
+
+mysql> select j_date, year(j_date) from emp;
++------------+--------------+
+| j_date     | year(j_date) |
++------------+--------------+
+| 2023-02-23 |         2023 |
+| 2023-10-24 |         2023 |
+| 2024-10-12 |         2024 |
+| 2024-09-18 |         2024 |
+| 2023-06-18 |         2023 |
+| 2021-10-12 |         2021 |
+| 2022-09-12 |         2022 |
+| 2023-01-10 |         2023 |
+| 2022-07-07 |         2022 |
+| 2021-07-07 |         2021 |
++------------+--------------+
+10 rows in set (0.01 sec)
+
+mysql> select j_date, month(j_date) from emp;
++------------+---------------+
+| j_date     | month(j_date) |
++------------+---------------+
+| 2023-02-23 |             2 |
+| 2023-10-24 |            10 |
+| 2024-10-12 |            10 |
+| 2024-09-18 |             9 |
+| 2023-06-18 |             6 |
+| 2021-10-12 |            10 |
+| 2022-09-12 |             9 |
+| 2023-01-10 |             1 |
+| 2022-07-07 |             7 |
+| 2021-07-07 |             7 |
++------------+---------------+
+10 rows in set (0.00 sec)
+
+mysql> select j_date, day(j_date) from emp;
++------------+-------------+
+| j_date     | day(j_date) |
++------------+-------------+
+| 2023-02-23 |          23 |
+| 2023-10-24 |          24 |
+| 2024-10-12 |          12 |
+| 2024-09-18 |          18 |
+| 2023-06-18 |          18 |
+| 2021-10-12 |          12 |
+| 2022-09-12 |          12 |
+| 2023-01-10 |          10 |
+| 2022-07-07 |           7 |
+| 2021-07-07 |           7 |
++------------+-------------+
+10 rows in set (0.01 sec)
+
+mysql> select name, j_date, age from emp where dno in(1,2) order by year(j_date) desc ;
++----------+------------+------+
+| name     | j_date     | age  |
++----------+------------+------+
+| Mayur    | 2024-10-12 |   23 |
+| Abhishek | 2024-09-18 |   24 |
+| Awanti   | 2023-10-24 |   25 |
+| Shubham  | 2023-06-18 |   23 |
+| Aman     | 2023-01-10 |   29 |
+| Prachi   | 2022-09-12 |   25 |
+| Jai      | 2022-07-07 |   22 |
+| Sakshi   | 2021-10-12 |   25 |
+| Yash     | 2021-07-07 |   23 |
++----------+------------+------+
+9 rows in set (0.01 sec)
+
+mysql> select date_add(curdate(), interval 15 day);
++--------------------------------------+
+| date_add(curdate(), interval 15 day) |
++--------------------------------------+
+| 2025-12-16                           |
++--------------------------------------+
+1 row in set (0.00 sec)
+
+mysql> select  curdate(),date_add(curdate(), interval 15 day);
++------------+--------------------------------------+
+| curdate()  | date_add(curdate(), interval 15 day) |
++------------+--------------------------------------+
+| 2025-12-01 | 2025-12-16                           |
++------------+--------------------------------------+
+1 row in set (0.00 sec)
+
+mysql> select  curdate(),date_add(curdate(), interval 3 month);
++------------+---------------------------------------+
+| curdate()  | date_add(curdate(), interval 3 month) |
++------------+---------------------------------------+
+| 2025-12-01 | 2026-03-01                            |
++------------+---------------------------------------+
+1 row in set (0.00 sec)
+
+mysql> select  curdate(),date_add(curdate(), interval 3 year);
++------------+--------------------------------------+
+| curdate()  | date_add(curdate(), interval 3 year) |
++------------+--------------------------------------+
+| 2025-12-01 | 2028-12-01                           |
++------------+--------------------------------------+
+1 row in set (0.00 sec)
+
+mysql> select  curdate(),date_sub(curdate(), interval 20 day);
++------------+--------------------------------------+
+| curdate()  | date_sub(curdate(), interval 20 day) |
++------------+--------------------------------------+
+| 2025-12-01 | 2025-11-11                           |
++------------+--------------------------------------+
+1 row in set (0.00 sec)
+
+mysql> select  datediff(curdate(),'2022-12-04');
++----------------------------------+
+| datediff(curdate(),'2022-12-04') |
++----------------------------------+
+|                             1093 |
++----------------------------------+
+1 row in set (0.01 sec)
+
+mysql> select floor(datediff(curdate(),j_date)/365) from emp;
++---------------------------------------+
+| floor(datediff(curdate(),j_date)/365) |
++---------------------------------------+
+|                                     2 |
+|                                     2 |
+|                                     1 |
+|                                     1 |
+|                                     2 |
+|                                     4 |
+|                                     3 |
+|                                     2 |
+|                                     3 |
+|                                     4 |
++---------------------------------------+
+10 rows in set (0.01 sec)
+
+mysql> select round(datediff(curdate(),j_date)/365) from emp;
++---------------------------------------+
+| round(datediff(curdate(),j_date)/365) |
++---------------------------------------+
+|                                     3 |
+|                                     2 |
+|                                     1 |
+|                                     1 |
+|                                     2 |
+|                                     4 |
+|                                     3 |
+|                                     3 |
+|                                     3 |
+|                                     4 |
++---------------------------------------+
+10 rows in set (0.01 sec)
+
+mysql> select ceil(datediff(curdate(),j_date)/365) from emp;
++--------------------------------------+
+| ceil(datediff(curdate(),j_date)/365) |
++--------------------------------------+
+|                                    3 |
+|                                    3 |
+|                                    2 |
+|                                    2 |
+|                                    3 |
+|                                    5 |
+|                                    4 |
+|                                    3 |
+|                                    4 |
+|                                    5 |
++--------------------------------------+
+10 rows in set (0.01 sec)
+
+mysql> select date_format(j_date,'%d-%m-%y') from emp;
++--------------------------------+
+| date_format(j_date,'%d-%m-%y') |
++--------------------------------+
+| 23-02-23                       |
+| 24-10-23                       |
+| 12-10-24                       |
+| 18-09-24                       |
+| 18-06-23                       |
+| 12-10-21                       |
+| 12-09-22                       |
+| 10-01-23                       |
+| 07-07-22                       |
+| 07-07-21                       |
++--------------------------------+
+10 rows in set (0.01 sec)
+
+mysql> select date_format(j_date,'%d-%m-%Y') from emp;
++--------------------------------+
+| date_format(j_date,'%d-%m-%Y') |
++--------------------------------+
+| 23-02-2023                     |
+| 24-10-2023                     |
+| 12-10-2024                     |
+| 18-09-2024                     |
+| 18-06-2023                     |
+| 12-10-2021                     |
+| 12-09-2022                     |
+| 10-01-2023                     |
+| 07-07-2022                     |
+| 07-07-2021                     |
++--------------------------------+
+10 rows in set (0.00 sec)
+
+mysql> select date_format(j_date,'%d-%M-%Y') from emp;
++--------------------------------+
+| date_format(j_date,'%d-%M-%Y') |
++--------------------------------+
+| 23-February-2023               |
+| 24-October-2023                |
+| 12-October-2024                |
+| 18-September-2024              |
+| 18-June-2023                   |
+| 12-October-2021                |
+| 12-September-2022              |
+| 10-January-2023                |
+| 07-July-2022                   |
+| 07-July-2021                   |
++--------------------------------+
+10 rows in set (0.01 sec)
+
+mysql> select date_format(j_date,'%D-%M-%Y') from emp;
++--------------------------------+
+| date_format(j_date,'%D-%M-%Y') |
++--------------------------------+
+| 23rd-February-2023             |
+| 24th-October-2023              |
+| 12th-October-2024              |
+| 18th-September-2024            |
+| 18th-June-2023                 |
+| 12th-October-2021              |
+| 12th-September-2022            |
+| 10th-January-2023              |
+| 7th-July-2022                  |
+| 7th-July-2021                  |
++--------------------------------+
+10 rows in set (0.00 sec)
+
+mysql> select date_format(j_date,'%a-%M-%Y') from emp;
++--------------------------------+
+| date_format(j_date,'%a-%M-%Y') |
++--------------------------------+
+| Thu-February-2023              |
+| Tue-October-2023               |
+| Sat-October-2024               |
+| Wed-September-2024             |
+| Sun-June-2023                  |
+| Tue-October-2021               |
+| Mon-September-2022             |
+| Tue-January-2023               |
+| Thu-July-2022                  |
+| Wed-July-2021                  |
++--------------------------------+
+10 rows in set (0.00 sec)
+
+mysql> select date_format(j_date,'%a-%b-%Y') from emp;
++--------------------------------+
+| date_format(j_date,'%a-%b-%Y') |
++--------------------------------+
+| Thu-Feb-2023                   |
+| Tue-Oct-2023                   |
+| Sat-Oct-2024                   |
+| Wed-Sep-2024                   |
+| Sun-Jun-2023                   |
+| Tue-Oct-2021                   |
+| Mon-Sep-2022                   |
+| Tue-Jan-2023                   |
+| Thu-Jul-2022                   |
+| Wed-Jul-2021                   |
++--------------------------------+
+10 rows in set (0.00 sec)
+
+mysql> select date_format(j_date,'%d-%b-%Y') from emp;
++--------------------------------+
+| date_format(j_date,'%d-%b-%Y') |
++--------------------------------+
+| 23-Feb-2023                    |
+| 24-Oct-2023                    |
+| 12-Oct-2024                    |
+| 18-Sep-2024                    |
+| 18-Jun-2023                    |
+| 12-Oct-2021                    |
+| 12-Sep-2022                    |
+| 10-Jan-2023                    |
+| 07-Jul-2022                    |
+| 07-Jul-2021                    |
++--------------------------------+
+10 rows in set (0.00 sec)
+
+mysql> select date_format(j_date,'%D-%b-%Y') from emp;
++--------------------------------+
+| date_format(j_date,'%D-%b-%Y') |
++--------------------------------+
+| 23rd-Feb-2023                  |
+| 24th-Oct-2023                  |
+| 12th-Oct-2024                  |
+| 18th-Sep-2024                  |
+| 18th-Jun-2023                  |
+| 12th-Oct-2021                  |
+| 12th-Sep-2022                  |
+| 10th-Jan-2023                  |
+| 7th-Jul-2022                   |
+| 7th-Jul-2021                   |
++--------------------------------+
+10 rows in set (0.00 sec)

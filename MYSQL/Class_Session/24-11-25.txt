@@ -1,0 +1,412 @@
+Enter password: ****
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 9
+Server version: 8.0.42 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2025, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| ass2               |
+| fbs                |
+| firstbit_sql       |
+| information_schema |
+| july25             |
+| mysql              |
+| performance_schema |
+| sakila             |
+| sys                |
+| world              |
++--------------------+
+10 rows in set (0.01 sec)
+
+mysql> use july25;
+Database changed
+mysql> show tables;
++------------------+
+| Tables_in_july25 |
++------------------+
+| branch           |
+| dept             |
+| emp              |
+| room             |
+| shirt            |
+| student          |
++------------------+
+6 rows in set (0.00 sec)
+
+mysql> desc emp;
++---------+-------------+------+-----+---------+----------------+
+| Field   | Type        | Null | Key | Default | Extra          |
++---------+-------------+------+-----+---------+----------------+
+| eid     | int         | NO   | PRI | NULL    | auto_increment |
+| name    | varchar(20) | NO   |     | NULL    |                |
+| salary  | int         | YES  |     | NULL    |                |
+| mobno   | int         | YES  | UNI | NULL    |                |
+| address | varchar(20) | YES  |     | Pune    |                |
+| dno     | int         | YES  | MUL | NULL    |                |
+| age     | int         | YES  |     | NULL    |                |
+| gender  | varchar(1)  | YES  |     | NULL    |                |
+| j_date  | date        | YES  |     | NULL    |                |
++---------+-------------+------+-----+---------+----------------+
+9 rows in set (0.00 sec)
+
+mysql> table emp;
++-----+----------+--------+-----------+----------+------+------+--------+------------+
+| eid | name     | salary | mobno     | address  | dno  | age  | gender | j_date     |
++-----+----------+--------+-----------+----------+------+------+--------+------------+
+| 101 | Deepak   |  26000 | 985012468 | Parbhani |    3 |   23 | M      | 2023-02-23 |
+| 102 | Awanti   |  25000 | 985012456 | Pune     |    1 |   25 | F      | 2023-10-24 |
+| 103 | Mayur    |  28000 | 978653420 | nagar    |    2 |   23 | M      | 2024-10-12 |
+| 104 | Abhishek |  26000 | 978656421 | Sangli   |    1 |   24 | M      | 2024-09-18 |
+| 105 | Shubham  |  26000 | 977865642 | Sangli   |    2 |   23 | M      | 2023-06-18 |
+| 106 | Sakshi   |  25000 | 978653320 | mumbai   |    2 |   25 | F      | 2021-10-12 |
+| 107 | Prachi   |  28000 | 975653320 | mumbai   |    2 |   25 | F      | 2022-09-12 |
+| 108 | Aman     |  24000 | 974543320 | Pune     |    1 |   29 | M      | 2023-01-10 |
+| 109 | Jai      |  26000 | 974563320 | Pune     |    1 |   22 | M      | 2022-07-07 |
+| 110 | Yash     |  26000 | 978563420 | Nagpur   |    2 |   23 | M      | 2021-07-07 |
++-----+----------+--------+-----------+----------+------+------+--------+------------+
+10 rows in set (0.00 sec)
+
+mysql> select * from emp;
++-----+----------+--------+-----------+----------+------+------+--------+------------+
+| eid | name     | salary | mobno     | address  | dno  | age  | gender | j_date     |
++-----+----------+--------+-----------+----------+------+------+--------+------------+
+| 101 | Deepak   |  26000 | 985012468 | Parbhani |    3 |   23 | M      | 2023-02-23 |
+| 102 | Awanti   |  25000 | 985012456 | Pune     |    1 |   25 | F      | 2023-10-24 |
+| 103 | Mayur    |  28000 | 978653420 | nagar    |    2 |   23 | M      | 2024-10-12 |
+| 104 | Abhishek |  26000 | 978656421 | Sangli   |    1 |   24 | M      | 2024-09-18 |
+| 105 | Shubham  |  26000 | 977865642 | Sangli   |    2 |   23 | M      | 2023-06-18 |
+| 106 | Sakshi   |  25000 | 978653320 | mumbai   |    2 |   25 | F      | 2021-10-12 |
+| 107 | Prachi   |  28000 | 975653320 | mumbai   |    2 |   25 | F      | 2022-09-12 |
+| 108 | Aman     |  24000 | 974543320 | Pune     |    1 |   29 | M      | 2023-01-10 |
+| 109 | Jai      |  26000 | 974563320 | Pune     |    1 |   22 | M      | 2022-07-07 |
+| 110 | Yash     |  26000 | 978563420 | Nagpur   |    2 |   23 | M      | 2021-07-07 |
++-----+----------+--------+-----------+----------+------+------+--------+------------+
+10 rows in set (0.00 sec)
+
+mysql> select name,j_date from emp;
++----------+------------+
+| name     | j_date     |
++----------+------------+
+| Deepak   | 2023-02-23 |
+| Awanti   | 2023-10-24 |
+| Mayur    | 2024-10-12 |
+| Abhishek | 2024-09-18 |
+| Shubham  | 2023-06-18 |
+| Sakshi   | 2021-10-12 |
+| Prachi   | 2022-09-12 |
+| Aman     | 2023-01-10 |
+| Jai      | 2022-07-07 |
+| Yash     | 2021-07-07 |
++----------+------------+
+10 rows in set (0.00 sec)
+
+mysql> select * from emp where address='pune';
++-----+--------+--------+-----------+---------+------+------+--------+------------+
+| eid | name   | salary | mobno     | address | dno  | age  | gender | j_date     |
++-----+--------+--------+-----------+---------+------+------+--------+------------+
+| 102 | Awanti |  25000 | 985012456 | Pune    |    1 |   25 | F      | 2023-10-24 |
+| 108 | Aman   |  24000 | 974543320 | Pune    |    1 |   29 | M      | 2023-01-10 |
+| 109 | Jai    |  26000 | 974563320 | Pune    |    1 |   22 | M      | 2022-07-07 |
++-----+--------+--------+-----------+---------+------+------+--------+------------+
+3 rows in set (0.01 sec)
+
+mysql> select * from emp where address='pune' and gender='pune';
+Empty set (0.00 sec)
+
+mysql> select * from emp where salary>25000;
++-----+----------+--------+-----------+----------+------+------+--------+------------+
+| eid | name     | salary | mobno     | address  | dno  | age  | gender | j_date     |
++-----+----------+--------+-----------+----------+------+------+--------+------------+
+| 101 | Deepak   |  26000 | 985012468 | Parbhani |    3 |   23 | M      | 2023-02-23 |
+| 103 | Mayur    |  28000 | 978653420 | nagar    |    2 |   23 | M      | 2024-10-12 |
+| 104 | Abhishek |  26000 | 978656421 | Sangli   |    1 |   24 | M      | 2024-09-18 |
+| 105 | Shubham  |  26000 | 977865642 | Sangli   |    2 |   23 | M      | 2023-06-18 |
+| 107 | Prachi   |  28000 | 975653320 | mumbai   |    2 |   25 | F      | 2022-09-12 |
+| 109 | Jai      |  26000 | 974563320 | Pune     |    1 |   22 | M      | 2022-07-07 |
+| 110 | Yash     |  26000 | 978563420 | Nagpur   |    2 |   23 | M      | 2021-07-07 |
++-----+----------+--------+-----------+----------+------+------+--------+------------+
+7 rows in set (0.00 sec)
+
+mysql> select name,salary,age,j_date from emp where salary<25000 ;
++------+--------+------+------------+
+| name | salary | age  | j_date     |
++------+--------+------+------------+
+| Aman |  24000 |   29 | 2023-01-10 |
++------+--------+------+------------+
+1 row in set (0.00 sec)
+
+mysql> update emp set salary=23000 where salary=26000;
+Query OK, 5 rows affected (0.01 sec)
+Rows matched: 5  Changed: 5  Warnings: 0
+
+mysql> table emp;
++-----+----------+--------+-----------+----------+------+------+--------+------------+
+| eid | name     | salary | mobno     | address  | dno  | age  | gender | j_date     |
++-----+----------+--------+-----------+----------+------+------+--------+------------+
+| 101 | Deepak   |  23000 | 985012468 | Parbhani |    3 |   23 | M      | 2023-02-23 |
+| 102 | Awanti   |  25000 | 985012456 | Pune     |    1 |   25 | F      | 2023-10-24 |
+| 103 | Mayur    |  28000 | 978653420 | nagar    |    2 |   23 | M      | 2024-10-12 |
+| 104 | Abhishek |  23000 | 978656421 | Sangli   |    1 |   24 | M      | 2024-09-18 |
+| 105 | Shubham  |  23000 | 977865642 | Sangli   |    2 |   23 | M      | 2023-06-18 |
+| 106 | Sakshi   |  25000 | 978653320 | mumbai   |    2 |   25 | F      | 2021-10-12 |
+| 107 | Prachi   |  28000 | 975653320 | mumbai   |    2 |   25 | F      | 2022-09-12 |
+| 108 | Aman     |  24000 | 974543320 | Pune     |    1 |   29 | M      | 2023-01-10 |
+| 109 | Jai      |  23000 | 974563320 | Pune     |    1 |   22 | M      | 2022-07-07 |
+| 110 | Yash     |  23000 | 978563420 | Nagpur   |    2 |   23 | M      | 2021-07-07 |
++-----+----------+--------+-----------+----------+------+------+--------+------------+
+10 rows in set (0.00 sec)
+
+mysql> update emp set salary=21000 where eid=104;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update emp set salary=24000 where eid=105;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> table emp;
++-----+----------+--------+-----------+----------+------+------+--------+------------+
+| eid | name     | salary | mobno     | address  | dno  | age  | gender | j_date     |
++-----+----------+--------+-----------+----------+------+------+--------+------------+
+| 101 | Deepak   |  23000 | 985012468 | Parbhani |    3 |   23 | M      | 2023-02-23 |
+| 102 | Awanti   |  25000 | 985012456 | Pune     |    1 |   25 | F      | 2023-10-24 |
+| 103 | Mayur    |  28000 | 978653420 | nagar    |    2 |   23 | M      | 2024-10-12 |
+| 104 | Abhishek |  21000 | 978656421 | Sangli   |    1 |   24 | M      | 2024-09-18 |
+| 105 | Shubham  |  24000 | 977865642 | Sangli   |    2 |   23 | M      | 2023-06-18 |
+| 106 | Sakshi   |  25000 | 978653320 | mumbai   |    2 |   25 | F      | 2021-10-12 |
+| 107 | Prachi   |  28000 | 975653320 | mumbai   |    2 |   25 | F      | 2022-09-12 |
+| 108 | Aman     |  24000 | 974543320 | Pune     |    1 |   29 | M      | 2023-01-10 |
+| 109 | Jai      |  23000 | 974563320 | Pune     |    1 |   22 | M      | 2022-07-07 |
+| 110 | Yash     |  23000 | 978563420 | Nagpur   |    2 |   23 | M      | 2021-07-07 |
++-----+----------+--------+-----------+----------+------+------+--------+------------+
+10 rows in set (0.00 sec)
+
+mysql> select eid,name,address from emp where gender='M' ;
++-----+----------+----------+
+| eid | name     | address  |
++-----+----------+----------+
+| 101 | Deepak   | Parbhani |
+| 103 | Mayur    | nagar    |
+| 104 | Abhishek | Sangli   |
+| 105 | Shubham  | Sangli   |
+| 108 | Aman     | Pune     |
+| 109 | Jai      | Pune     |
+| 110 | Yash     | Nagpur   |
++-----+----------+----------+
+7 rows in set (0.00 sec)
+
+mysql> select * from emp where age<=28 and age >=25;l
++-----+--------+--------+-----------+---------+------+------+--------+------------+
+| eid | name   | salary | mobno     | address | dno  | age  | gender | j_date     |
++-----+--------+--------+-----------+---------+------+------+--------+------------+
+| 102 | Awanti |  25000 | 985012456 | Pune    |    1 |   25 | F      | 2023-10-24 |
+| 106 | Sakshi |  25000 | 978653320 | mumbai  |    2 |   25 | F      | 2021-10-12 |
+| 107 | Prachi |  28000 | 975653320 | mumbai  |    2 |   25 | F      | 2022-09-12 |
++-----+--------+--------+-----------+---------+------+------+--------+------------+
+3 rows in set (0.00 sec)
+
+    -> ^C
+mysql> select * from emp where age<28 and age >25;
+Empty set (0.00 sec)
+
+mysql> select * from emp where j_date between '2021-01-01' and '2021-12-31';
++-----+--------+--------+-----------+---------+------+------+--------+------------+
+| eid | name   | salary | mobno     | address | dno  | age  | gender | j_date     |
++-----+--------+--------+-----------+---------+------+------+--------+------------+
+| 106 | Sakshi |  25000 | 978653320 | mumbai  |    2 |   25 | F      | 2021-10-12 |
+| 110 | Yash   |  23000 | 978563420 | Nagpur  |    2 |   23 | M      | 2021-07-07 |
++-----+--------+--------+-----------+---------+------+------+--------+------------+
+2 rows in set (0.01 sec)
+
+mysql> select * from emp where dno in (2,3);
++-----+---------+--------+-----------+----------+------+------+--------+------------+
+| eid | name    | salary | mobno     | address  | dno  | age  | gender | j_date     |
++-----+---------+--------+-----------+----------+------+------+--------+------------+
+| 103 | Mayur   |  28000 | 978653420 | nagar    |    2 |   23 | M      | 2024-10-12 |
+| 105 | Shubham |  24000 | 977865642 | Sangli   |    2 |   23 | M      | 2023-06-18 |
+| 106 | Sakshi  |  25000 | 978653320 | mumbai   |    2 |   25 | F      | 2021-10-12 |
+| 107 | Prachi  |  28000 | 975653320 | mumbai   |    2 |   25 | F      | 2022-09-12 |
+| 110 | Yash    |  23000 | 978563420 | Nagpur   |    2 |   23 | M      | 2021-07-07 |
+| 101 | Deepak  |  23000 | 985012468 | Parbhani |    3 |   23 | M      | 2023-02-23 |
++-----+---------+--------+-----------+----------+------+------+--------+------------+
+6 rows in set (0.01 sec)
+
+mysql> select * from emp where dno=2 or dno=3;
++-----+---------+--------+-----------+----------+------+------+--------+------------+
+| eid | name    | salary | mobno     | address  | dno  | age  | gender | j_date     |
++-----+---------+--------+-----------+----------+------+------+--------+------------+
+| 103 | Mayur   |  28000 | 978653420 | nagar    |    2 |   23 | M      | 2024-10-12 |
+| 105 | Shubham |  24000 | 977865642 | Sangli   |    2 |   23 | M      | 2023-06-18 |
+| 106 | Sakshi  |  25000 | 978653320 | mumbai   |    2 |   25 | F      | 2021-10-12 |
+| 107 | Prachi  |  28000 | 975653320 | mumbai   |    2 |   25 | F      | 2022-09-12 |
+| 110 | Yash    |  23000 | 978563420 | Nagpur   |    2 |   23 | M      | 2021-07-07 |
+| 101 | Deepak  |  23000 | 985012468 | Parbhani |    3 |   23 | M      | 2023-02-23 |
++-----+---------+--------+-----------+----------+------+------+--------+------------+
+6 rows in set (0.00 sec)
+
+mysql> select * from emp where address in('pune','nagpur',''mumbai);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'mumbai)' at line 1
+mysql> select * from emp where address in('pune','nagpur','mumbai');
++-----+--------+--------+-----------+---------+------+------+--------+------------+
+| eid | name   | salary | mobno     | address | dno  | age  | gender | j_date     |
++-----+--------+--------+-----------+---------+------+------+--------+------------+
+| 102 | Awanti |  25000 | 985012456 | Pune    |    1 |   25 | F      | 2023-10-24 |
+| 106 | Sakshi |  25000 | 978653320 | mumbai  |    2 |   25 | F      | 2021-10-12 |
+| 107 | Prachi |  28000 | 975653320 | mumbai  |    2 |   25 | F      | 2022-09-12 |
+| 108 | Aman   |  24000 | 974543320 | Pune    |    1 |   29 | M      | 2023-01-10 |
+| 109 | Jai    |  23000 | 974563320 | Pune    |    1 |   22 | M      | 2022-07-07 |
+| 110 | Yash   |  23000 | 978563420 | Nagpur  |    2 |   23 | M      | 2021-07-07 |
++-----+--------+--------+-----------+---------+------+------+--------+------------+
+6 rows in set (0.00 sec)
+
+mysql> select name ,salary from emp where address not in('nagpur','nagar');
++----------+--------+
+| name     | salary |
++----------+--------+
+| Deepak   |  23000 |
+| Awanti   |  25000 |
+| Abhishek |  21000 |
+| Shubham  |  24000 |
+| Sakshi   |  25000 |
+| Prachi   |  28000 |
+| Aman     |  24000 |
+| Jai      |  23000 |
++----------+--------+
+8 rows in set (0.00 sec)
+
+mysql> select * from emp
+    -> where salary between 25000 and 30000;
++-----+--------+--------+-----------+---------+------+------+--------+------------+
+| eid | name   | salary | mobno     | address | dno  | age  | gender | j_date     |
++-----+--------+--------+-----------+---------+------+------+--------+------------+
+| 102 | Awanti |  25000 | 985012456 | Pune    |    1 |   25 | F      | 2023-10-24 |
+| 103 | Mayur  |  28000 | 978653420 | nagar   |    2 |   23 | M      | 2024-10-12 |
+| 106 | Sakshi |  25000 | 978653320 | mumbai  |    2 |   25 | F      | 2021-10-12 |
+| 107 | Prachi |  28000 | 975653320 | mumbai  |    2 |   25 | F      | 2022-09-12 |
++-----+--------+--------+-----------+---------+------+------+--------+------------+
+4 rows in set (0.01 sec)
+
+mysql> select * from emp
+    -> where dno not in 3 and salary not between 22000 and 26000;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '3 and salary not between 22000 and 26000' at line 2
+mysql> select * from emp
+    -> where dno not in (3) and salary not between 22000 and 26000;
++-----+----------+--------+-----------+---------+------+------+--------+------------+
+| eid | name     | salary | mobno     | address | dno  | age  | gender | j_date     |
++-----+----------+--------+-----------+---------+------+------+--------+------------+
+| 103 | Mayur    |  28000 | 978653420 | nagar   |    2 |   23 | M      | 2024-10-12 |
+| 104 | Abhishek |  21000 | 978656421 | Sangli  |    1 |   24 | M      | 2024-09-18 |
+| 107 | Prachi   |  28000 | 975653320 | mumbai  |    2 |   25 | F      | 2022-09-12 |
++-----+----------+--------+-----------+---------+------+------+--------+------------+
+3 rows in set (0.00 sec)
+
+mysql> select name,salary from emp
+    -> where age>23 and saary >25000;
+ERROR 1054 (42S22): Unknown column 'saary' in 'where clause'
+mysql> select name,salary from emp
+    -> where age>23 and salary >25000;
++--------+--------+
+| name   | salary |
++--------+--------+
+| Prachi |  28000 |
++--------+--------+
+1 row in set (0.00 sec)
+
+mysql> select * from emp
+    -> where address in ('mumbai','pune') and gender='f';
++-----+--------+--------+-----------+---------+------+------+--------+------------+
+| eid | name   | salary | mobno     | address | dno  | age  | gender | j_date     |
++-----+--------+--------+-----------+---------+------+------+--------+------------+
+| 102 | Awanti |  25000 | 985012456 | Pune    |    1 |   25 | F      | 2023-10-24 |
+| 106 | Sakshi |  25000 | 978653320 | mumbai  |    2 |   25 | F      | 2021-10-12 |
+| 107 | Prachi |  28000 | 975653320 | mumbai  |    2 |   25 | F      | 2022-09-12 |
++-----+--------+--------+-----------+---------+------+------+--------+------------+
+3 rows in set (0.00 sec)
+
+mysql> show tables;
++------------------+
+| Tables_in_july25 |
++------------------+
+| branch           |
+| dept             |
+| emp              |
+| room             |
+| shirt            |
+| student          |
++------------------+
+6 rows in set (0.00 sec)
+
+mysql> use ass2;
+Database changed
+mysql> show tables;
++----------------+
+| Tables_in_ass2 |
++----------------+
+| books          |
+| issue          |
+| member         |
+| member101      |
++----------------+
+4 rows in set (0.00 sec)
+
+mysql> table books;
++---------+---------------------+---------------+--------+----------+
+| book_no | book_name           | author_name   | cost   | category |
++---------+---------------------+---------------+--------+----------+
+|     101 | Let us c            | Denis Ritchie | 450.00 | System   |
+|     102 | Oracle-Complete Ref | Loni          | 550.00 | Database |
+|     103 | Mastering SQL       | Loni          | 250.00 | Database |
+|     104 | PL SQL-Ref          | Scott Urman   | 750.00 | Database |
+|     106 | DBMS Concepts       | Navathe       | 900.00 | Database |
+|     107 | Operating Systems   | Galvin        | 800.00 | System   |
+|     108 | Harry Potter        | Rowling       | 650.00 | Fiction  |
++---------+---------------------+---------------+--------+----------+
+7 rows in set (0.02 sec)
+
+mysql> select * from books
+    -> where author_name='Loni' and cost<500;
++---------+---------------+-------------+--------+----------+
+| book_no | book_name     | author_name | cost   | category |
++---------+---------------+-------------+--------+----------+
+|     103 | Mastering SQL | Loni        | 250.00 | Database |
++---------+---------------+-------------+--------+----------+
+1 row in set (0.00 sec)
+
+mysql> select name,address from member
+    -> where m_type='annual' and acc_date<'2023=01-26';
+ERROR 1054 (42S22): Unknown column 'name' in 'field list'
+mysql> table member;
++-----------+---------------+----------------+---------------+-----------------+-----------+-------------------+----------------+
+| member_id | member_name   | member_address | acc_open_date | membership_type | fees_paid | max_books_allowed | penalty_amount |
++-----------+---------------+----------------+---------------+-----------------+-----------+-------------------+----------------+
+|         1 | Richa Sharma  | Pune           | 2005-12-10    | Lifetime        |     25000 |                 5 |          50.00 |
+|         2 | Garime Sen    | Pune           | 2025-11-21    | Annual          |      1000 |                 3 |           NULL |
+|         3 | Amit Verma    | Mumbai         | 2006-01-01    | Quarterly       |       500 |                 2 |           0.00 |
+|         4 | Neha Kulkarni | Delhi          | 2006-09-12    | Annual          |      1200 |                 4 |          10.00 |
+|         5 | Rahul Jain    | Pune           | 2007-02-11    | Half Yearly     |      1500 |                 3 |           0.00 |
+|         6 | Priya Rao     | Chennai        | 2005-04-22    | Lifetime        |     20000 |                 5 |          20.00 |
+|         7 | Sanjay Patil  | Nashik         | 2006-05-15    | Annual          |       800 |                 3 |           0.00 |
+|         8 | Arav Sharma   | Pune           | 2009-10-12    | Annual          |      1000 |               110 |           NULL |
++-----------+---------------+----------------+---------------+-----------------+-----------+-------------------+----------------+
+8 rows in set (0.00 sec)
+
+mysql> select member_name,member_address from member
+    -> where membership_type='annual' and acc_open_date<'2023=01-26';
++---------------+----------------+
+| member_name   | member_address |
++---------------+----------------+
+| Neha Kulkarni | Delhi          |
+| Sanjay Patil  | Nashik         |
+| Arav Sharma   | Pune           |
++---------------+----------------+
+3 rows in set, 1 warning (0.01 sec)
