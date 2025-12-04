@@ -417,7 +417,8 @@ mysql> select * from books order by cost desc limit 3;
 +---------+-------------------+-------------+--------+----------+
 
 40) List the total cost of all the books that are currently issued but not returned.
-mysql> select sum(cost) as 'Total cost of non-returned books' from books where book_no in (select book_no from issue where return_date is null);
+mysql> select sum(cost) as 'Total cost of non-returned books' from books 
+->where book_no in (select book_no from issue where return_date is null);
 +----------------------------------+
 | Total cost of non-returned books |
 +----------------------------------+

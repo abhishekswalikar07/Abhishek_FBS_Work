@@ -79,6 +79,51 @@ mysql> select employee_id, first_name,last_name, salary  from employee order by 
 |         100 | Steven     | King      | 26400.00 |
 +-------------+------------+-----------+----------+
 
+6. Write a query to get the total salaries payable to employees.
+mysql> select sum(salary) 'Total_Salary'
+    -> from employee;
++--------------+
+| Total_Salary |
++--------------+
+|    118580.00 |
++--------------+
+
+7. Write a query to get the maximum and minimum salary from employees table.
+
+mysql> select max(salary),min(salary) from employee;
++-------------+-------------+
+| max(salary) | min(salary) |
++-------------+-------------+
+|    26400.00 |     4620.00 |
++-------------+-------------+
+
+8. Write a query to get the average salary and number of employees in the employees table.
+mysql> select count(employee_id) 'Total_Employee',avg(salary) 'Average_Salry' from employee;
++----------------+---------------+
+| Total_Employee | Average_Salry |
++----------------+---------------+
+|             10 |  11858.000000 |
++----------------+---------------+
+
+9. Write a query to get the number of employees working with the company.
+mysql> select count(employee_id) 'Total_Employee' from employee;
++----------------+
+| Total_Employee |
++----------------+
+|             10 |
++----------------+
+
+10.Write a query to get the number of jobs available in the employees table
+mysql> select job_id,count(*) 'Available_Jobs_Number' from employee group by job_id;
++---------+-----------------------+
+| job_id  | Available_Jobs_Number |
++---------+-----------------------+
+| AD_PRES |                     1 |
+| AD_VP   |                     2 |
+| IT_PROG |                     5 |
+| SA_MAN  |                     2 |
++---------+-----------------------+
+
 11.Write a query to select first 10 records from a table.
 mysql> select * from employee limit 10;
 +-------------+------------+-----------+---------------+--------------+------------+---------+----------+----------------+------------+---------------+
@@ -163,7 +208,14 @@ mysql> select last_name,job_id,salary from employee where department_id in (50,6
 +-----------+---------+---------+
 
 18.Write a query to display the last name of employees whose names have exactly 6 characters.
-
+mysql> select last_name from employee where length(last_name)=6;
++-----------+
+| last_name |
++-----------+
+| Hunold    |
+| Austin    |
+| Faviet    |
++-----------+
 
 19.Write a query to display the last name of employees having 'e' as the third character.
 mysql> select last_name from employee where last_name like "__e%";
