@@ -168,12 +168,12 @@ mysql> select count(*) from member;
 +----------+
 
 16) Display the total no of books issued
-mysql> select count(book_no) from issue;
-+----------------+
-| count(book_no) |
-+----------------+
-|              4 |
-+----------------+
+mysql> select count(book_no) 'Total_issued_books'  from issue;
++--------------------+
+| Total_issued_books |
++--------------------+
+|                  4 |
++--------------------+
 
 17) Display the average membership fees paid by all the members
 mysql> select avg(fees_paid) from member;
@@ -184,15 +184,15 @@ mysql> select avg(fees_paid) from member;
 +----------------+
 
 18) List the various categories and count of books in each category.
-mysql> select category,count(*) from books group by category;
-+----------+----------+
-| category | count(*) |
-+----------+----------+
-| System   |        2 |
-| Database |        3 |
-| RDBMS    |        1 |
-| Fiction  |        1 |
-+----------+----------+
+mysql> select category,count(*) 'Total_books' from books group by category;
++----------+-------------+
+| category | Total_books |
++----------+-------------+
+| System   |           2 |
+| Database |           3 |
+| RDBMS    |           1 |
+| Fiction  |           1 |
++----------+-------------+
 
 19) List the book_No and the number of times the book is issued in the descending order of count.
 mysql> select book_no , count(*) from issue group by book_no order by count(*) desc;
@@ -217,7 +217,6 @@ mysql> select member_id, count(*) from issue group by member_id having count(boo
 Empty set (0.01 sec)
 
 22) Display the member id, book no and no of times the same book is issued by the member in the descending order of count.
-t syntax to use near 'selct member_id, book_no,count(*) from issue group by member_id,book_no order by' at line 1
 mysql> select member_id, book_no,count(*) from issue group by member_id,book_no order by count(*) desc;
 +-----------+---------+----------+
 | member_id | book_no | count(*) |
@@ -270,8 +269,7 @@ mysql> (select member_id, count(*) 'books issued' from issue group by member_id 
 +-----------+--------------+
 
 
-27) List all the Issue_details for books issued in December and July
-without using any arithmetic, Logical or comparison operator.
+27) List all the Issue_details for books issued in December and July without using any arithmetic, Logical or comparison operator.
 mysql> select * from issue where issue_date like '____-12-%' or issue_date like'____-7-%';
 +--------------+---------+-----------+------------+-------------+
 | Lib_Issue_Id | Book_No | Member_Id | Issue_Date | Return_Date |
