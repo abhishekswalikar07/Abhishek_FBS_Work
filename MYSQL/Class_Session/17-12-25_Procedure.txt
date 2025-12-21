@@ -1,0 +1,30 @@
+mysql> delimiter #
+mysql> create procedure demo()
+    -> begin
+    ->          select * from emp;
+    -> end#
+
+mysql> create procedure details()
+    -> begin
+    -> select e.name,e.salary,d.name
+    -> from emp e inner join dept d
+    -> on e.dno=d.dno;
+    -> end #
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> call details()#
++----------+--------+-------+
+| name     | salary | name  |
++----------+--------+-------+
+| Awanti   |  25000 | IT    |
+| Abhishek |  21000 | IT    |
+| Aman     |  24000 | IT    |
+| Jai      |  23000 | IT    |
+| Mayur    |  28000 | Admin |
+| Shubham  |  24000 | Admin |
+| Sakshi   |  25000 | Admin |
+| Prachi   |  28000 | Admin |
+| Yash     |  23000 | Admin |
+| Deepak   |  23000 | HR    |
++----------+--------+-------+
+10 rows in set (0.01 sec)

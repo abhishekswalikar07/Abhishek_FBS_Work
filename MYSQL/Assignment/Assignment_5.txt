@@ -279,15 +279,16 @@ mysql> select * from issue where issue_date like '____-12-%' or issue_date like'
 +--------------+---------+-----------+------------+-------------+
 
 28) List the Book_No, Book_Name and Issue_date for all the books that are issued in month of December and belong to category Database.
-mysql> select book_no ,(select book_name from books where book_no=issue.book_no) 'Book_Name',issue_date from issue
-    -> where
-    -> month(issue_date)=12 and
-    -> book_no in (select book_no from books where category='Database');
+mysql> select b.book_no,b.book_name,i.issue_date
+    -> from books b inner join issue i
+    -> on b.book_no =i.book_no
+    -> where month(i.issue_date)='12' and category='database';
 +---------+---------------------+------------+
-| book_no | Book_Name           | issue_date |
+| book_no | book_name           | issue_date |
 +---------+---------------------+------------+
 |     102 | Oracle-Complete Ref | 2006-12-25 |
 +---------+---------------------+------------+
+1 row in set (0.01 sec)
 
 29) List the Member Id, Member Name and max books allowed in the descending order of the max books allowed.
 mysql> select member_id,member_name,max_books_allowed from member order by max_books_allowed desc;
@@ -305,14 +306,12 @@ mysql> select member_id,member_name,max_books_allowed from member order by max_b
 +-----------+---------------+-------------------+
 
 30) List the Book No, Book Name, Issue_date and Return_Date for all the books issued by Richa Sharma.
-mysql> SELECT i.book_no,
-    ->        (SELECT b.book_name FROM books b WHERE b.book_no = i.book_no) AS 'Book Name',
-    ->        i.issue_date,
-    ->        i.return_date
-    -> FROM issue i
-    -> WHERE i.member_id = (SELECT m.member_id FROM member m WHERE m.member_name = 'Richa Sharma');
+mysql> select b.book_no,b.book_name,i.issue_date,i.return_date
+    -> from books b inner join issue i
+    -> on b.book_no=i.book_no
+    -> where member_id in(select member_id from member where member_name='richa sharma');
 +---------+-----------+------------+-------------+
-| book_no | Book Name | issue_date | return_date |
+| book_no | book_name | issue_date | return_date |
 +---------+-----------+------------+-------------+
 |     101 | Let us c  | 2006-12-10 | 2006-12-31  |
 +---------+-----------+------------+-------------+
@@ -339,6 +338,15 @@ mysql> SELECT book_name,cost,category from books
 +-------------------+--------+----------+
 
 33) List all the Issue_Details where Issue_date is not within the Acc_open_date and Return_date for that member.
+mysql> select i.*,m.acc_open_date from issue i inner join member m
+    -> on i.member_id=m.member_id
+    -> where issue_date not between acc_open_date and return_date;
++--------------+---------+-----------+------------+-------------+---------------+
+| Lib_Issue_Id | Book_No | Member_Id | Issue_Date | Return_Date | acc_open_date |
++--------------+---------+-----------+------------+-------------+---------------+
+|         7002 |     102 |         2 | 2006-12-25 | 2006-12-31  | 2025-11-21    |
+|         7005 |     104 |         2 | 2006-11-15 | 2006-11-30  | 2025-11-21    |
++--------------+---------+-----------+------------+-------------+---------------+
 
 
 34) List all the members that have not issued a single book so far.
@@ -356,31 +364,28 @@ mysql> SELECT *
 +-----------+---------------+----------------+---------------+-----------------+-----------+-------------------+----------------+
 
 35) List all the members that have issued the same book as issued by Garima.
-mysql> SELECT member_name
-    -> FROM member
-    -> WHERE member_id IN (
-    ->     SELECT DISTINCT member_id
-    ->     FROM issue
-    ->     WHERE book_no IN (
-    ->         SELECT book_no
-    ->         FROM issue
-    ->         WHERE member_id = 2
-    ->     )
-    ->     AND member_id <> 2
-    -> );
+mysql> select m.member_name from
+    -> member m inner join issue i
+    -> on m.member_id=i.member_id
+    -> where book_no in(select book_no from issue where member_id =(select member_id from member where member_name='garime sen'));
++-------------+
+| member_name |
++-------------+
+| Garime Sen  |
+| Garime Sen  |
++-------------+
 
 36) List the Book_Name, Price of all the books that are not returned for more then 30 days.
-mysql> SELECT
-    ->     issue.book_no,
-    ->     (SELECT book_name FROM books WHERE book_no = issue.book_no) AS 'Book Name',
-    ->     (SELECT cost FROM books WHERE book_no = issue.book_no) AS 'Price'
-    -> FROM issue
-    -> WHERE return_date IS NULL;
-+---------+-----------+--------+
-| book_no | Book Name | Price  |
-+---------+-----------+--------+
-|     101 | Let us c  | 450.00 |
-+---------+-----------+--------+
+mysql> select b.book_name,b.cost
+    -> from books b inner join issue i
+    -> on b.book_no=i.book_no
+    -> where i.return_date >(issue_date+30) or return_date is null;
++-----------+--------+
+| book_name | cost   |
++-----------+--------+
+| Let us c  | 450.00 |
++-----------+--------+
+
 37) List all the authors and book_name that has more then 1 book written by them.
 mysql> select author_name, book_name from books where author_name in (select author_name from books group by author_name having count(*)>1);
 +-------------+---------------------+
@@ -423,17 +428,19 @@ mysql> select sum(cost) as 'Total cost of non-returned books' from books
 |                           450.00 |
 +----------------------------------+
 41) List the details of the book that has been issued maximum no of times.
-
+mysql> select b.book_no,b.book_name, count(*) as 'times_issued'
+    -> from books b inner join issue i
+    -> on b.book_no=i.book_no
+    -> group by b.book_no,b.book_name
+    -> order by times_issued desc limit 1;
++---------+-----------+--------------+
+| book_no | book_name | times_issued |
++---------+-----------+--------------+
+|     101 | Let us c  |            2 |
++---------+-----------+--------------+
 
 42) List how many books are issued to lifetime members.
-mysql> select issue.book_no,
-    -> (select book_name from books where book_no=issue.book_no) as 'Book Name' from issue
-    -> where issue.member_id in (select member_id from member where membership_type='lifetime');
-+---------+-----------+
-| book_no | Book Name |
-+---------+-----------+
-|     101 | Let us c  |
-+---------+-----------+
+
 
 43) List all member types and how many members are there in each type.
 mysql> select membership_type,count(*) from member group by membership_type;
