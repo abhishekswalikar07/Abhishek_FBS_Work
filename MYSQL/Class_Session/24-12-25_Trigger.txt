@@ -1,0 +1,5 @@
+create trigger tr_product after update on product 
+for each row 
+begin
+	insert into history(pno,price,m_date) 	values(old.pno,old.price,old.m_date);
+end

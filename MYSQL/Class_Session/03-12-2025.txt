@@ -1,0 +1,270 @@
+Enter password: ****
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 9
+Server version: 8.0.42 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2025, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| ass2               |
+| ass3               |
+| fbs                |
+| firstbit_sql       |
+| information_schema |
+| july25             |
+| mysql              |
+| performance_schema |
+| sakila             |
+| sys                |
+| world              |
++--------------------+
+11 rows in set (0.05 sec)
+
+mysql> use july25;
+Database changed
+mysql> show tables;
++------------------+
+| Tables_in_july25 |
++------------------+
+| branch           |
+| dept             |
+| emp              |
+| room             |
+| shirt            |
+| student          |
++------------------+
+6 rows in set (0.02 sec)
+
+mysql> table emp;
++-----+----------+--------+-----------+----------+------+------+--------+------------+
+| eid | name     | salary | mobno     | address  | dno  | age  | gender | j_date     |
++-----+----------+--------+-----------+----------+------+------+--------+------------+
+| 101 | Deepak   |  23000 | 985012468 | Parbhani |    3 |   23 | M      | 2023-02-23 |
+| 102 | Awanti   |  25000 | 985012456 | Pune     |    1 |   25 | F      | 2023-10-24 |
+| 103 | Mayur    |  28000 | 978653420 | nagar    |    2 |   23 | M      | 2024-10-12 |
+| 104 | Abhishek |  21000 | 978656421 | Sangli   |    1 |   24 | M      | 2024-09-18 |
+| 105 | Shubham  |  24000 | 977865642 | Sangli   |    2 |   23 | M      | 2023-06-18 |
+| 106 | Sakshi   |  25000 | 978653320 | mumbai   |    2 |   25 | F      | 2021-10-12 |
+| 107 | Prachi   |  28000 | 975653320 | mumbai   |    2 |   25 | F      | 2022-09-12 |
+| 108 | Aman     |  24000 | 974543320 | Pune     |    1 |   29 | M      | 2023-01-10 |
+| 109 | Jai      |  23000 | 974563320 | Pune     |    1 |   22 | M      | 2022-07-07 |
+| 110 | Yash     |  23000 | 978563420 | Nagpur   |    2 |   23 | M      | 2021-07-07 |
++-----+----------+--------+-----------+----------+------+------+--------+------------+
+10 rows in set (0.08 sec)
+
+mysql> select dno,max(salary) from emp group by dno;
++------+-------------+
+| dno  | max(salary) |
++------+-------------+
+|    1 |       25000 |
+|    2 |       28000 |
+|    3 |       23000 |
++------+-------------+
+3 rows in set (0.01 sec)
+
+mysql> select dno,count(*) from emp group by dno;
++------+----------+
+| dno  | count(*) |
++------+----------+
+|    1 |        4 |
+|    2 |        5 |
+|    3 |        1 |
++------+----------+
+3 rows in set (0.00 sec)
+
+mysql> select j_date, count(*) from emp group by j_date;
++------------+----------+
+| j_date     | count(*) |
++------------+----------+
+| 2023-02-23 |        1 |
+| 2023-10-24 |        1 |
+| 2024-10-12 |        1 |
+| 2024-09-18 |        1 |
+| 2023-06-18 |        1 |
+| 2021-10-12 |        1 |
+| 2022-09-12 |        1 |
+| 2023-01-10 |        1 |
+| 2022-07-07 |        1 |
+| 2021-07-07 |        1 |
++------------+----------+
+10 rows in set (0.01 sec)
+
+mysql> select category,max(cost),count(*) from books group by category;
+ERROR 1146 (42S02): Table 'july25.books' doesn't exist
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| ass2               |
+| ass3               |
+| fbs                |
+| firstbit_sql       |
+| information_schema |
+| july25             |
+| mysql              |
+| performance_schema |
+| sakila             |
+| sys                |
+| world              |
++--------------------+
+11 rows in set (0.00 sec)
+
+mysql> use ass2;
+Database changed
+mysql> show tables;
++----------------+
+| Tables_in_ass2 |
++----------------+
+| books          |
+| issue          |
+| member         |
++----------------+
+3 rows in set (0.00 sec)
+
+mysql> select category,max(cost),count(*) from books group by category;
++----------+-----------+----------+
+| category | max(cost) | count(*) |
++----------+-----------+----------+
+| System   |    800.00 |        2 |
+| Database |    900.00 |        3 |
+| RDBMS    |    300.00 |        1 |
+| Fiction  |    650.00 |        1 |
++----------+-----------+----------+
+4 rows in set (0.00 sec)
+
+mysql> use july25;
+Database changed
+mysql> show tables;
++------------------+
+| Tables_in_july25 |
++------------------+
+| branch           |
+| dept             |
+| emp              |
+| room             |
+| shirt            |
+| student          |
++------------------+
+6 rows in set (0.00 sec)
+
+mysql> table emp;
++-----+----------+--------+-----------+----------+------+------+--------+------------+
+| eid | name     | salary | mobno     | address  | dno  | age  | gender | j_date     |
++-----+----------+--------+-----------+----------+------+------+--------+------------+
+| 101 | Deepak   |  23000 | 985012468 | Parbhani |    3 |   23 | M      | 2023-02-23 |
+| 102 | Awanti   |  25000 | 985012456 | Pune     |    1 |   25 | F      | 2023-10-24 |
+| 103 | Mayur    |  28000 | 978653420 | nagar    |    2 |   23 | M      | 2024-10-12 |
+| 104 | Abhishek |  21000 | 978656421 | Sangli   |    1 |   24 | M      | 2024-09-18 |
+| 105 | Shubham  |  24000 | 977865642 | Sangli   |    2 |   23 | M      | 2023-06-18 |
+| 106 | Sakshi   |  25000 | 978653320 | mumbai   |    2 |   25 | F      | 2021-10-12 |
+| 107 | Prachi   |  28000 | 975653320 | mumbai   |    2 |   25 | F      | 2022-09-12 |
+| 108 | Aman     |  24000 | 974543320 | Pune     |    1 |   29 | M      | 2023-01-10 |
+| 109 | Jai      |  23000 | 974563320 | Pune     |    1 |   22 | M      | 2022-07-07 |
+| 110 | Yash     |  23000 | 978563420 | Nagpur   |    2 |   23 | M      | 2021-07-07 |
++-----+----------+--------+-----------+----------+------+------+--------+------------+
+10 rows in set (0.00 sec)
+
+mysql> select gender,max(salary),min(salary) from emp
+    -> group by gender;
++--------+-------------+-------------+
+| gender | max(salary) | min(salary) |
++--------+-------------+-------------+
+| M      |       28000 |       21000 |
+| F      |       28000 |       25000 |
++--------+-------------+-------------+
+2 rows in set (0.00 sec)
+
+mysql> select dno, address,avg(age) from emp group by dno,address;
++------+----------+----------+
+| dno  | address  | avg(age) |
++------+----------+----------+
+|    3 | Parbhani |  23.0000 |
+|    1 | Pune     |  25.3333 |
+|    2 | nagar    |  23.0000 |
+|    1 | Sangli   |  24.0000 |
+|    2 | Sangli   |  23.0000 |
+|    2 | mumbai   |  25.0000 |
+|    2 | Nagpur   |  23.0000 |
++------+----------+----------+
+7 rows in set (0.01 sec)
+
+mysql> select dno, count(*) from emp
+    -> group by dno having dno is not null;
++------+----------+
+| dno  | count(*) |
++------+----------+
+|    1 |        4 |
+|    2 |        5 |
+|    3 |        1 |
++------+----------+
+3 rows in set (0.00 sec)
+
+mysql> select gender,avg(age) from emp
+    -> group by gender
+    -> having avg(age)>25;
+Empty set (0.01 sec)
+
+mysql> use ass2;
+Database changed
+mysql> show tables;
++----------------+
+| Tables_in_ass2 |
++----------------+
+| books          |
+| issue          |
+| member         |
++----------------+
+3 rows in set (0.01 sec)
+
+mysql> table member;
++-----------+---------------+----------------+---------------+-----------------+-----------+-------------------+----------------+
+| member_id | member_name   | member_address | acc_open_date | membership_type | fees_paid | max_books_allowed | penalty_amount |
++-----------+---------------+----------------+---------------+-----------------+-----------+-------------------+----------------+
+|         1 | Richa Sharma  | Pune           | 2005-12-10    | Lifetime        |     25000 |                 5 |          50.00 |
+|         2 | Garime Sen    | Pune           | 2025-11-21    | Annual          |      1000 |                 3 |         100.00 |
+|         3 | Amit Verma    | Mumbai         | 2006-01-01    | Quarterly       |       500 |                 2 |           0.00 |
+|         4 | Neha Kulkarni | Delhi          | 2006-09-12    | Annual          |      1200 |                 4 |          10.00 |
+|         5 | Rahul Jain    | Pune           | 2007-02-11    | Half Yearly     |      1500 |                 3 |           0.00 |
+|         6 | Priya Rao     | Chennai        | 2005-04-22    | Lifetime        |     20000 |                 5 |          20.00 |
+|         7 | Sanjay Patil  | Nashik         | 2006-05-15    | Annual          |       800 |                 3 |           0.00 |
+|         8 | Arav Sharma   | Pune           | 2009-10-12    | Annual          |      1000 |               110 |           NULL |
++-----------+---------------+----------------+---------------+-----------------+-----------+-------------------+----------------+
+8 rows in set (0.00 sec)
+
+mysql> select membership_type,count(*)
+    -> from member
+    -> group by membership_type
+    -> having sum(fees_paid)>2000;
++-----------------+----------+
+| membership_type | count(*) |
++-----------------+----------+
+| Lifetime        |        2 |
+| Annual          |        4 |
++-----------------+----------+
+2 rows in set (0.00 sec)
+
+mysql> select membership_type,count(*)
+    -> from member
+    -> group by membership_type,address
+    -> having address='pune';
+ERROR 1054 (42S22): Unknown column 'address' in 'group statement'
+mysql> select membership_type,count(*)
+    -> from member
+    -> group by membership_type,member_address
+    -> having member_address='pune';
++-----------------+----------+
+| membership_type | count(*) |
++-----------------+----------+
+| Lifetime        |        1 |
+| Annual          |        2 |
+| Half Yearly     |        1 |
++-----------------+----------+
