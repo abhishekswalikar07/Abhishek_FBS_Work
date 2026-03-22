@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    {{data}}
+    <hr>
+    <table border="4">
+        <tr><th>ID</th><th>Name</th><th>Percentage</th></tr>
+        {% for student in data %}
+        <tr>
+            {% for s in student %}
+            <td>{{s}}</td>
+            {% endfor %}
+        </tr>
+        {% endfor %}
+    </table>
+
+</body>
+</html>
